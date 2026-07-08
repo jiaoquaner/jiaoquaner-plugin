@@ -1,0 +1,16 @@
+{
+  "name": "jiaoquaner",
+  "description": "焦圈儿（jiaoquaner）平台 AI 能力技能库：降 AI 率等 API 能力的统一入口与各能力子技能",
+  "version": "0.1.0",
+  "author": {
+    "name": "qilinqian",
+    "email": "qilinqian@hotmail.com"
+  },
+  "keywords": [
+    "jiaoquaner",
+    "焦圈儿",
+    "降AI率",
+    "humanize",
+    "ai-rate"
+  ]
+}

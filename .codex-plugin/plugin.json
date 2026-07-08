@@ -1,0 +1,34 @@
+{
+  "name": "jiaoquaner",
+  "version": "0.1.0",
+  "description": "焦圈儿（jiaoquaner）平台 AI 能力技能库：降 AI 率等 API 能力的统一入口与各能力子技能",
+  "author": {
+    "name": "qilinqian",
+    "email": "qilinqian@hotmail.com"
+  },
+  "homepage": "https://github.com/jiaoquaner/jiaoquaner-plugin",
+  "repository": "https://github.com/jiaoquaner/jiaoquaner-plugin",
+  "license": "MIT",
+  "keywords": [
+    "jiaoquaner",
+    "焦圈儿",
+    "降AI率",
+    "humanize",
+    "ai-rate",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "焦圈儿 jiaoquaner",
+    "shortDescription": "焦圈儿平台 AI 能力：降 AI 率等",
+    "longDescription": "焦圈儿（jiaoquaner）平台各 AI 接口能力的技能库：统一鉴权 / 计费 / 错误码入口，按需路由到降 AI 率等具体能力。",
+    "developerName": "qilinqian",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/jiaoquaner/jiaoquaner-plugin"
+  }
+}

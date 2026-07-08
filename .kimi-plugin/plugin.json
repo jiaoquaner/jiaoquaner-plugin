@@ -1,0 +1,33 @@
+{
+  "name": "jiaoquaner",
+  "version": "0.1.0",
+  "description": "焦圈儿（jiaoquaner）平台 AI 能力技能库：降 AI 率等",
+  "author": {
+    "name": "qilinqian",
+    "email": "qilinqian@hotmail.com"
+  },
+  "homepage": "https://github.com/jiaoquaner/jiaoquaner-plugin",
+  "license": "MIT",
+  "keywords": [
+    "jiaoquaner",
+    "焦圈儿",
+    "降AI率",
+    "humanize",
+    "ai-rate",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "skillInstructions": "Kimi Code tool mapping for 焦圈儿（jiaoquaner）skills:\n\n- 当技能需要向用户提问（索要 / 确认 API Key、提示会真实扣费等）时，调用 Kimi 的 `AskUserQuestion` 工具，提供 1 个问题、2-4 个具体选项，推荐项放首位并在标签后加 `(Recommended)`；除非该工具不可用或处于自动授权模式，否则不要把选项当普通文本输出。\n- 当技能要求发 HTTP 请求 / 运行 `curl` / `jq` 等命令时，使用 Kimi 的 `Bash` 工具。\n- 当技能引用 `Skill` 工具时，使用 Kimi 原生 `Skill` 工具加载对应技能。\n- 读文件用 `Read`，创建 / 编辑文件用 `Write` / `Edit`，搜索文件内容用 `Grep`，按名查找用 `Glob`，抓取 URL 用 `FetchURL`。\n- 切勿把用户的 API Key 写入任何文件或提交到 git。",
+  "interface": {
+    "displayName": "焦圈儿 jiaoquaner",
+    "shortDescription": "焦圈儿平台 AI 能力：降 AI 率等",
+    "longDescription": "焦圈儿（jiaoquaner）平台各 AI 接口能力的技能库：统一鉴权 / 计费 / 错误码入口，按需路由到降 AI 率等具体能力。",
+    "developerName": "qilinqian",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/jiaoquaner/jiaoquaner-plugin"
+  }
+}
