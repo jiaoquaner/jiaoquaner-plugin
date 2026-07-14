@@ -3,7 +3,7 @@
   "description": "焦圈儿平台技能市场",
   "owner": {
     "name": "qilinqian",
-    "email": "qilinqian@hotmail.com"
+    "email": "company@mtnecho.com"
   },
   "plugins": [
     {
@@ -13,7 +13,7 @@
       "source": "./",
       "author": {
         "name": "qilinqian",
-        "email": "qilinqian@hotmail.com"
+        "email": "company@mtnecho.com"
       }
     }
   ]

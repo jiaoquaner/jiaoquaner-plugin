@@ -109,6 +109,16 @@ export JIAOQUANER_API_KEY=sk-xxxxxx   # 推荐、可复用；需在启动会话�
 - 每次调用按 API Key 所属用户的**焦耳余额真实扣费**，失败不扣费。
 - 接口均同步、单次返回，无批量/并发；技能不会私自加重试循环反复扣费。
 
+## 更新到最新版本
+
+各客户端都直接从本仓库拉取，更新方式：
+
+| 客户端 | 更新命令 |
+| --- | --- |
+| Claude Code | `/plugin marketplace update jiaoquaner`，然后在 `/plugin` 里更新 |
+| Gemini CLI | `gemini extensions update jiaoquaner` |
+| opencode / Pi / Kimi | 重新执行各自的安装命令即可 |
+
 ## 扩展新能力
 
 焦圈儿新增接口时：
@@ -117,6 +127,18 @@ export JIAOQUANER_API_KEY=sk-xxxxxx   # 推荐、可复用；需在启动会话�
 2. 子技能只写该接口特有的请求体 / 响应 / 专属错误码；
 3. 在入口 `skills/jiaoquaner/SKILL.md` 的「能力路由」表加一行意图 → 子技能映射；
 4. 公共鉴权 / 计费 / 错误码继续复用入口，避免重复。
+
+## 发布新版本（维护者）
+
+根目录的 `VERSION` 是版本号的**唯一真相源**；六个 CLI manifest 里的 `version` 字段由脚本同步，不要手改。
+
+```bash
+./scripts/release.sh 0.2.0              # 同步版本号 → 提交 → 打 tag → 推送 → 建 GitHub Release
+./scripts/release.sh 0.2.0 --dry-run    # 只改文件，不提交，用于确认改动
+./scripts/check-version.sh              # 校验六个 manifest 是否都与 VERSION 一致
+```
+
+推送到 `main` 即完成发布——所有安装方式都指向默认分支；tag 与 Release 用于留下变更记录和可回滚的版本点。CI（`.github/workflows/check-version.yml`）会在每次 push / PR 上跑一致性校验，漏改任何一个 manifest 都会直接失败。
 
 ## 许可
 

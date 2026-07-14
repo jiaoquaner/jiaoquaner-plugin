@@ -1,0 +1,21 @@
+name: check-version
+
+# 各 CLI 的 manifest 里都硬编码了一份 version。任何一处与根目录 VERSION 不一致，
+# 对应客户端就会认为"没有新版本"而不更新。这个 job 保证这种情况在合入前就红掉。
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 公开仓库：fork 提的 PR 会在 CI 里执行其分支上的脚本。显式收成只读，
+# 避免 GITHUB_TOKEN 继承仓库/组织的默认可写权限。
+permissions:
+  contents: read
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 校验 manifest 版本号与 VERSION 一致
+        run: ./scripts/check-version.sh
