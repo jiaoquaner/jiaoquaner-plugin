@@ -9,6 +9,24 @@
 | `jiaoquaner:jiaoquaner` | 平台统一入口：判断意图、建立公共上下文（鉴权/计费/错误码）后分发 | — |
 | `jiaoquaner:humanize` | 降 AI 率 / 去 AI 化 / 让文本更像人写 | `POST /api/v1/agent/reduce-ai-rate` |
 
+`humanize` 自带两个契约一致的调用脚本，一条命令完成「安全转义原文 → 发请求 → 判 `code` → 取正文」，AI 与人都可直接调用，避免手拼 JSON / 解析出错：
+
+| 脚本 | 适用环境 | 依赖 |
+| --- | --- | --- |
+| [`scripts/reduce_ai_rate.sh`](./skills/humanize/scripts/reduce_ai_rate.sh) | macOS / Linux / WSL / Git Bash | `curl` + (`jq` 或 `python3`) |
+| [`scripts/reduce_ai_rate.ps1`](./skills/humanize/scripts/reduce_ai_rate.ps1) | Windows 原生 PowerShell | PowerShell 5.1+（系统自带） |
+
+```bash
+JIAOQUANER_API_KEY=sk-xxxxxx sh ./skills/humanize/scripts/reduce_ai_rate.sh -f draft.md -o result.md
+```
+
+```powershell
+$env:JIAOQUANER_API_KEY = "sk-xxxxxx"
+.\skills\humanize\scripts\reduce_ai_rate.ps1 -File draft.md -Out result.md
+```
+
+stdout 为改写后的正文，stderr 为 `content_id` 等元信息；退出码 `0` 成功、`2` 接口业务错误、`3` 网络失败、`4` 用法错误、`5` 缺依赖。sh 版为 POSIX `sh`，在 `sh`/`bash`/`dash`/`zsh` 下均可运行。
+
 ## 安装
 
 技能内容（`skills/*/SKILL.md`）跨 CLI 通用，仓库为每个 CLI 各配了一份适配清单，均指向同一份 `./skills/`。技能**按需触发**，不会强制注入每个会话。

@@ -18,28 +18,30 @@ argument-hint: [想用焦圈儿做什么 / 待处理文本或文件]
 |----------|----------|------|
 | 降 AI 率 / 去 AI 化 / 让文本更像人写 | **jiaoquaner:humanize** | `POST /api/v1/agent/reduce-ai-rate` |
 
-**REQUIRED SUB-SKILL:** 确定意图后，用对应子 skill（如 `jiaoquaner:humanize`）构造并发送请求。本层只负责公共上下文（鉴权 / 计费 / 错误码），子 skill 只写该接口特有的请求体与响应。
+**REQUIRED SUB-SKILL:** 确定意图后，用对应子 skill（如 `jiaoquaner:humanize`）构造并发送请求。子 skill 若自带 `scripts/` 下的调用脚本（如 humanize 的 `reduce_ai_rate.sh`），**优先用脚本调用**，不要自己拼 JSON 或手写 curl。本层只负责公共上下文（鉴权 / 计费 / 错误码），子 skill 只写该接口特有的请求体与响应。
 
 匹配不到能力时，如实告诉用户焦圈儿平台暂无对应接口，不要臆造 endpoint。
 
 ## 公共配置（所有子能力通用）
 
 - **域名**：`https://api-server.jiaoquaner.com`
-- **认证**：请求头 `Authorization: Bearer <API_KEY>`
+- **认证**：请求头 `Authorization: Bearer ${JIAOQUANER_API_KEY}`
 - **传输**：系统自带 `curl`，`jq` 安全构造/解析 JSON，不依赖 Python 等运行时
 
-### API Key（优先环境变量）
+### API Key（从环境变量读）
+
+`JIAOQUANER_API_KEY` 优先、`jiaoquaner_api_key` 兜底。发请求前先做一次不回显 key 的探测：
 
 ```bash
-API_KEY="${JIAOQUANER_API_KEY:-$jiaoquaner_api_key}"
+[ -n "${JIAOQUANER_API_KEY:-$jiaoquaner_api_key}" ] && echo "key ok" || echo "key missing"
 ```
 
-为空时**不要中断**，转达二选一让用户配置后再继续：
+`key missing` 时**不要中断**，转达二选一让用户配置后再继续：
 
 1. `export JIAOQUANER_API_KEY=sk-xxxxxx`（推荐、可复用，需在启动会话前 export）
-2. 直接把明文 key（形如 `sk-xxxxxx`）贴给你，本次运行用 `JIAOQUANER_API_KEY=sk-xxxxxx` 临时赋值
+2. 直接把明文 key（形如 `sk-xxxxxx`）贴给你，本次运行在 curl 前加 `JIAOQUANER_API_KEY=sk-xxxxxx` 临时赋值
 
-key 在焦圈儿 Web 端「API keys」页面创建，仅返回一次。**绝不要把 key 写进任何文件或提交到 git。**
+key 在焦圈儿 Web 端「API keys」页面创建，仅返回一次。**绝不要把 key 写进任何文件（含 `.env`、shell rc）或提交到 git，也不要 echo 出来。**
 
 ## 计费纪律（强制）
 
