@@ -1,6 +1,6 @@
 ---
 name: humanize
-description: 调用焦圈儿（jiaoquaner）/api/v1/agent/reduce-ai-rate 接口对文本进行「降 AI 率」改写，返回改写后的完整文本。当用户想降低某段文字/文章/文档的 AI 味、去 AI 化、降 AI 率、让文本更像人写的，或直接要求调用降 AI 率接口时使用。支持直接传文本或传文件路径；本 skill 自带可执行脚本 scripts/reduce_ai_rate.sh（macOS/Linux/WSL/Git Bash）与 scripts/reduce_ai_rate.ps1（Windows PowerShell），一条命令完成建请求/发请求/解析响应。此为焦圈儿平台能力，公共上下文见 jiaoquaner:jiaoquaner。
+description: 一键过朱雀 AI 检测的降 AI 率工具，公众号、小红书、头条号、知乎、百家号通用。调用焦圈儿（jiaoquaner）/api/v1/agent/reduce-ai-rate 接口对文本进行「降 AI 率」改写，返回改写后的完整文本。当用户想降低某段文字/文章/文档的 AI 味、去 AI 化、降 AI 率、让文本更像人写的，或直接要求调用降 AI 率接口时使用。支持直接传文本或传文件路径；本 skill 自带可执行脚本 scripts/reduce_ai_rate.sh（macOS/Linux/WSL/Git Bash）与 scripts/reduce_ai_rate.ps1（Windows PowerShell），一条命令完成建请求/发请求/解析响应。此为焦圈儿平台能力，公共上下文见 jiaoquaner:jiaoquaner。
 argument-hint: [待降AI率的文本或文件路径]
 ---
 
